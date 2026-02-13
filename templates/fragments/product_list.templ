@@ -1,0 +1,19 @@
+package fragments
+
+import "github.com/lunai-monster/lunar-stack/internal/database/sqlc"
+
+templ ProductList(products []sqlc.Product) {
+    <div id="products" class="flex flex-row flex-wrap gap-4 items-center justify-center">
+        for _, p := range products {
+            <div>
+                <h1>Title { p.Title }</h1>
+                <h1>SKU { p.Sku }</h1>
+                <h1>PriceCents { p.Pricecents }</h1>
+                <form method="delete" action={"/products/" + p.Sku} x-target="products">
+                    <button>Delete</button>
+                </form>
+                <a x-target="product-form" href={"/products/" + p.Sku + "/edit"}>Update</a>
+            </div>
+        }
+    </div>
+}
